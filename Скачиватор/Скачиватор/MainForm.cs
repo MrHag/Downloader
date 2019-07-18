@@ -303,11 +303,54 @@ namespace Скачиватор
         private string GET(string Url, string Data)
         {
             WebRequest req = WebRequest.Create(Url + Data);
-            WebResponse resp = req.GetResponse();
+            WebResponse resp = null;
+
+            Exception exception = null;
+
+            System.Threading.Thread wait = new System.Threading.Thread(new System.Threading.ThreadStart( ()=> {
+                try
+                {
+                    resp = req.GetResponse();
+                }
+                catch(Exception e)
+                {
+
+                    exception = e;
+
+                }
+
+            }));
+            wait.Start();
+
+            System.Threading.Thread.Sleep(1000);
+            if (resp == null)
+            {
+
+                System.Threading.Thread.Sleep(5000);
+
+                if (resp == null)
+                {
+                    req.Abort();
+                    wait.Abort();
+                    if (exception != null)
+                        throw new Exception("Ошибка получения данных\n" + exception.Message);
+
+                    throw new Exception("Ошибка получения данных");
+                }
+            }
+
+            if (exception != null)
+                throw exception;
+
+
+
+
             Stream stream = resp.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
             string Out = sr.ReadToEnd();
             sr.Close();
+            stream.Close();
+            resp.Close();
             return Out;
         }
 
@@ -401,7 +444,7 @@ namespace Скачиватор
             {
                 try
                 {
-                    Process proc = Start_hidden_program(node + ".exe", "http-server\\bin\\http-server "+files_directory+"\\ --p " + port_number.Value);
+                    Process proc = Start_hidden_program(node + ".exe", "http-server\\bin\\http-server \""+files_directory+"\" --p " + port_number.Value+"");
                     
 
 
@@ -723,7 +766,7 @@ namespace Скачиватор
         void refresh_files_list()
         {
 
-            if (files_directory != "")
+            if (files_directory != "" && Directory.Exists(files_directory))
             {
                 FilesList.Items.Clear();
                 DirectoryInfo directory = new DirectoryInfo(files_directory);
@@ -735,6 +778,7 @@ namespace Скачиватор
                 }
 
             }
+
 
         }
 
@@ -748,27 +792,48 @@ namespace Скачиватор
 
         private void defaultFolder_check_CheckedChanged(object sender, EventArgs e)
         {
-
-            if (defaultFolder_check.Checked)
+            try
             {
-                files_directory = Directory.GetCurrentDirectory() + "\\Files";
-                OpenFolder_button.Enabled = false;
+                
+
+
+                if (defaultFolder_check.Checked)
+                {
+                    files_directory = Directory.GetCurrentDirectory() + "\\Files";
+                    OpenFolder_button.Enabled = false;
+                    if (!Directory.Exists(files_directory))
+                    {
+
+                        Directory.CreateDirectory(files_directory);
+
+                    }
+
+                }
+                else
+                {
+                    files_directory = folderBrowser.SelectedPath;
+                    OpenFolder_button.Enabled = true;
+                }
+
+                if (Directory.Exists(files_directory))
+                {
+                    Directory_text.Text = files_directory;
+
+                    errorProvider1.SetError(Directory_text, "Папка применится после перезагрузки сервера.");
+
+                    refresh_files_list();
+                }
+                if (files_directory == "")
+                    errorProvider1.SetError(Directory_text, null);
+
+                
             }
-            else
+            catch (Exception ex)
             {
-                files_directory = folderBrowser.SelectedPath;
-                OpenFolder_button.Enabled = true;
+
+                Error_mes("Ошибка: \n" + ex.Message);
+
             }
-
-
-
-            Directory_text.Text = files_directory;
-            
-            errorProvider1.SetError(Directory_text, "Папка применится после перезагрузки сервера.");
-            if (files_directory == "")
-                errorProvider1.SetError(Directory_text, null);
-
-            refresh_files_list();
 
 
         }

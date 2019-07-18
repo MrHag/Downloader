@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.Bodymenu = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -463,7 +464,7 @@
             this.FilesList_contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.копироватьToolStripMenuItem});
             this.FilesList_contextMenu.Name = "FilesList_contextMenu";
-            this.FilesList_contextMenu.Size = new System.Drawing.Size(183, 48);
+            this.FilesList_contextMenu.Size = new System.Drawing.Size(183, 26);
             // 
             // копироватьToolStripMenuItem
             // 
@@ -481,6 +482,7 @@
             this.Controls.Add(this.Bodymenu);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Скачиватор";
