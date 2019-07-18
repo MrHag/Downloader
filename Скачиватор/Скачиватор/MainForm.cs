@@ -384,7 +384,7 @@ namespace Скачиватор
             Hidden_process.StartInfo.FileName = Name;
             Hidden_process.StartInfo.Arguments = Arguments;
             Hidden_process.StartInfo.UseShellExecute = false;
-            Hidden_process.StartInfo.CreateNoWindow = false;
+            Hidden_process.StartInfo.CreateNoWindow = true;
             Hidden_process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Hidden_process.Start();
             return Hidden_process;
@@ -396,10 +396,17 @@ namespace Скачиватор
         {
 
             server_work = true;
-            toogleServer_button.Text = "Остановить";
+            BeginInvoke(new InvokeDelegate(() => {
 
+                toogleServer_button.Text = "Остановить";
+            toogle_Server_tool.Text = "Остановить";
             errorProvider1.SetError(Directory_text, null);
 
+                subdomen_text.Enabled = false;
+                port_number.Enabled = false;
+
+
+            }));
         }
         
         void ServerStop()
@@ -409,7 +416,7 @@ namespace Скачиватор
             BeginInvoke(new InvokeDelegate(()=> {
 
                 toogleServer_button.Text = "Запустить";
-
+                toogle_Server_tool.Text = "Запустить";
                 subdomen_text.Enabled = true;
 
                 port_number.Enabled = true;
@@ -423,7 +430,7 @@ namespace Скачиватор
         }
 
 
-        void ProgramClose(object sender, FormClosingEventArgs args)
+        void ProgramClose(object sender, FormClosingEventArgs args = null)
         {
 
             thread_wathcher.Abort();
@@ -435,9 +442,7 @@ namespace Скачиватор
 
         void StartServer()
         {
-
-            subdomen_text.Enabled = false;
-            port_number.Enabled = false;
+            
             set_status(25, "Запуск сервера");
 
             for (int i = 0; i < 5; i++)
@@ -856,6 +861,30 @@ namespace Скачиватор
         private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Clipboard.SetText("http://" + domain +"/"+ FilesList.SelectedItem);
+        }
+
+        private void выйти_Files_tool_Click(object sender, EventArgs e)
+        {
+
+            Close();
+
+        }
+
+        private void toogle_Server_tool_Click(object sender, EventArgs e)
+        {
+
+            toogleServer_button_Click(sender, e);
+
+        }
+
+        private void перезапустить_Server_tool_Click(object sender, EventArgs e)
+        {
+
+            if(server_work)
+               toogleServer_button_Click(sender, e);
+
+            toogleServer_button_Click(sender, e);
+
         }
     }
 }

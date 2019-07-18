@@ -1,1 +1,0 @@
-cd localtunnel/bin & lt.cmd --port 84 

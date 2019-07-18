@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.File_tool = new System.Windows.Forms.ToolStripDropDownButton();
+            this.выйти_Files_tool = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Server_tool = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toogle_Server_tool = new System.Windows.Forms.ToolStripMenuItem();
+            this.перезапустить_Server_tool = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Bodymenu = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -68,6 +75,7 @@
             this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.FilesList_contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1.SuspendLayout();
             this.Bodymenu.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -84,12 +92,71 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.File_tool,
+            this.toolStripSeparator1,
+            this.Server_tool,
+            this.toolStripSeparator2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(608, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // File_tool
+            // 
+            this.File_tool.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.File_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выйти_Files_tool});
+            this.File_tool.Image = ((System.Drawing.Image)(resources.GetObject("File_tool.Image")));
+            this.File_tool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.File_tool.Name = "File_tool";
+            this.File_tool.Size = new System.Drawing.Size(46, 22);
+            this.File_tool.Text = "Файл";
+            // 
+            // выйти_Files_tool
+            // 
+            this.выйти_Files_tool.Name = "выйти_Files_tool";
+            this.выйти_Files_tool.Size = new System.Drawing.Size(108, 22);
+            this.выйти_Files_tool.Text = "Выйти";
+            this.выйти_Files_tool.Click += new System.EventHandler(this.выйти_Files_tool_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // Server_tool
+            // 
+            this.Server_tool.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Server_tool.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toogle_Server_tool,
+            this.перезапустить_Server_tool});
+            this.Server_tool.Image = ((System.Drawing.Image)(resources.GetObject("Server_tool.Image")));
+            this.Server_tool.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Server_tool.Name = "Server_tool";
+            this.Server_tool.Size = new System.Drawing.Size(59, 22);
+            this.Server_tool.Text = "Сервер";
+            // 
+            // toogle_Server_tool
+            // 
+            this.toogle_Server_tool.Name = "toogle_Server_tool";
+            this.toogle_Server_tool.Size = new System.Drawing.Size(180, 22);
+            this.toogle_Server_tool.Text = "Запустить";
+            this.toogle_Server_tool.Click += new System.EventHandler(this.toogle_Server_tool_Click);
+            // 
+            // перезапустить_Server_tool
+            // 
+            this.перезапустить_Server_tool.Name = "перезапустить_Server_tool";
+            this.перезапустить_Server_tool.Size = new System.Drawing.Size(180, 22);
+            this.перезапустить_Server_tool.Text = "Перезапустить";
+            this.перезапустить_Server_tool.Click += new System.EventHandler(this.перезапустить_Server_tool_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // Bodymenu
             // 
@@ -131,6 +198,7 @@
             // URL_design_link
             // 
             this.URL_design_link.AutoSize = true;
+            this.URL_design_link.LinkColor = System.Drawing.Color.DodgerBlue;
             this.URL_design_link.Location = new System.Drawing.Point(71, 71);
             this.URL_design_link.Name = "URL_design_link";
             this.URL_design_link.Size = new System.Drawing.Size(51, 13);
@@ -223,6 +291,7 @@
             // 
             // toogleServer_button
             // 
+            this.toogleServer_button.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.toogleServer_button.Location = new System.Drawing.Point(102, 103);
             this.toogleServer_button.Name = "toogleServer_button";
             this.toogleServer_button.Size = new System.Drawing.Size(75, 23);
@@ -361,6 +430,7 @@
             // 
             // refresh_button
             // 
+            this.refresh_button.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.refresh_button.Location = new System.Drawing.Point(16, 28);
             this.refresh_button.Name = "refresh_button";
             this.refresh_button.Size = new System.Drawing.Size(75, 23);
@@ -406,6 +476,7 @@
             // 
             // OpenFolder_button
             // 
+            this.OpenFolder_button.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.OpenFolder_button.Location = new System.Drawing.Point(327, 3);
             this.OpenFolder_button.Name = "OpenFolder_button";
             this.OpenFolder_button.Size = new System.Drawing.Size(94, 23);
@@ -416,6 +487,7 @@
             // 
             // refresh_files
             // 
+            this.refresh_files.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.refresh_files.Location = new System.Drawing.Point(307, 141);
             this.refresh_files.Name = "refresh_files";
             this.refresh_files.Size = new System.Drawing.Size(75, 23);
@@ -455,7 +527,7 @@
             // GlobalStatus
             // 
             this.GlobalStatus.Name = "GlobalStatus";
-            this.GlobalStatus.Size = new System.Drawing.Size(43, 17);
+            this.GlobalStatus.Size = new System.Drawing.Size(40, 17);
             this.GlobalStatus.Text = "Статус";
             this.GlobalStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -464,12 +536,12 @@
             this.FilesList_contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.копироватьToolStripMenuItem});
             this.FilesList_contextMenu.Name = "FilesList_contextMenu";
-            this.FilesList_contextMenu.Size = new System.Drawing.Size(183, 26);
+            this.FilesList_contextMenu.Size = new System.Drawing.Size(177, 26);
             // 
             // копироватьToolStripMenuItem
             // 
             this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.копироватьToolStripMenuItem.Text = "Копировать ссылку";
             this.копироватьToolStripMenuItem.Click += new System.EventHandler(this.копироватьToolStripMenuItem_Click);
             // 
@@ -487,6 +559,8 @@
             this.Name = "MainForm";
             this.Text = "Скачиватор";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.Bodymenu.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -550,6 +624,13 @@
         private System.Windows.Forms.CheckBox defaultFolder_check;
         private System.Windows.Forms.ContextMenuStrip FilesList_contextMenu;
         private System.Windows.Forms.ToolStripMenuItem копироватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton File_tool;
+        private System.Windows.Forms.ToolStripMenuItem выйти_Files_tool;
+        private System.Windows.Forms.ToolStripDropDownButton Server_tool;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toogle_Server_tool;
+        private System.Windows.Forms.ToolStripMenuItem перезапустить_Server_tool;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
